@@ -1,8 +1,22 @@
 package org.blackjack.src.main.java.blackjack.model.player;
 
+import lombok.EqualsAndHashCode;
+import org.blackjack.src.main.java.blackjack.model.bank.BankAccount;
+
+@EqualsAndHashCode(callSuper=false)
 public class BlackJackPlayer extends Player {
     private int balance;
     private int currentBet;
+    private BankAccount account;
+
+    public BankAccount getAccount() {
+        return account;
+    }
+
+    // Метод для инициализации BankAccount
+    public void setAccount(BankAccount account) {
+        this.account = account;
+    }
 
     public BlackJackPlayer(int initialBalance) {
         this.balance = initialBalance;
@@ -20,6 +34,11 @@ public class BlackJackPlayer extends Player {
     @Override
     public boolean shouldHit() {
         return getHandValue() < 21;
+    }
+
+    private int getHandValue() {
+       int value=0;
+       return value;
     }
 
     public void win() {

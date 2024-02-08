@@ -3,8 +3,10 @@ package org.blackjack.src.main.java.blackjack.controller;
 
 
 import org.blackjack.src.main.java.blackjack.model.bank.Bank;
+import org.blackjack.src.main.java.blackjack.model.bank.BankAccount;
 import org.blackjack.src.main.java.blackjack.model.game.BlackJackGame;
 import org.blackjack.src.main.java.blackjack.model.game.GameResult;
+import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
 import org.blackjack.src.main.java.blackjack.model.player.Player;
 
@@ -14,24 +16,28 @@ import java.util.List;
 public class BlackjackCasino {
     private Bank bank;
     private Dealer dealer;
-
     private List<BlackJackGame> games;
 
-    public BlackjackCasino(Dealer dealer) {
-        this.bank = new Bank();
-        this.games = new ArrayList<>();
+    public BlackjackCasino(Bank bank, Dealer dealer) {
+        this.bank = bank;
         this.dealer = dealer;
+        this.games = new ArrayList<>();
     }
 
-    public void registerPlayer(Player player, int initialBalance) {
-        bank.registerPlayer(player, initialBalance);
+    public void registerPlayer(BlackJackPlayer player, int initialBalance) {
+        BankAccount account = new BankAccount(initialBalance);
+        BlackJackPlayer BlackJackplayer = null;
+        BlackJackplayer.setAccount(account); // Устанавливаем связанный банковский счёт для игрока
+        bank.registerAccount(account); // Регистрируем счёт в банке
     }
 
     public void startGame(List<Player> players) {
         BlackJackGame game = new BlackJackGame(dealer);
         players.forEach(player -> {
             game.addPlayer(player);
-            bank.placeBet(player, 10); // Пример ставки
+            // Используем BankAccount игрока для ставки
+            BlackJackPlayer BlackJackplayer = null;
+            bank.placeBet(BlackJackplayer.getAccount(), 10); // Пример ставки
         });
         game.startNewGame();
         resolveBets(game);
@@ -41,16 +47,19 @@ public class BlackjackCasino {
     private void resolveBets(BlackJackGame game) {
         List<GameResult> results = game.getResults();
         for (GameResult result : results) {
-            Player player = result.getPlayer();
+            BlackJackPlayer player = (BlackJackPlayer) result.getPlayer();
             switch (result.getResult()) {
-                case "win":
-                    bank.payoutWin(player, 20); // Пример выигрыша
+                case WIN:
+                    // Используем BankAccount игрока для выплаты выигрыша
+                    BlackJackPlayer BlackJackplayer = null;
+                    bank.payoutWin(BlackJackplayer.getAccount(), 20); // Пример выигрыша
                     break;
-                case "lose":
+                case LOSE:
                     // Ставка уже учтена
                     break;
-                case "push":
-                    bank.refundBet(player, 10);
+                case PUSH:
+                    // Используем BankAccount игрока для возврата ставки
+                    //bank.refundBet(BlackJackplayer.getAccount(), 10);
                     break;
             }
         }

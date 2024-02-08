@@ -2,6 +2,7 @@ package org.blackjack.src.main.java.blackjack.model.game;
 
 
 
+import org.blackjack.src.main.java.blackjack.model.card.CardBlackjackValue;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
 import org.blackjack.src.main.java.blackjack.model.player.Player;
 import org.blackjack.src.main.java.blackjack.utils.Deck;
@@ -57,15 +58,17 @@ public class BlackJackGame {
     // Возвращает список результатов игры
     public List<GameResult> getResults() {
         List<GameResult> results = new ArrayList<>();
-        int dealerScore = dealer.getHandValue();
+        // Предполагаем, что у класса Dealer тоже есть доступ к hand через getHand() или подобный метод
+        CardBlackjackValue CardBlackjackValue = new CardBlackjackValue();
+        int dealerScore = CardBlackjackValue.getHandValue(dealer.getHand());
         for (Player player : players) {
-            int playerScore = player.getHandValue();
+            int playerScore = CardBlackjackValue.getHandValue(player.getHand());
             if (playerScore > 21 || (dealerScore <= 21 && dealerScore > playerScore)) {
-                results.add(new GameResult(player, "lose"));
+                results.add(new GameResult(player, GameResultType.LOSE));
             } else if (playerScore == dealerScore) {
-                results.add(new GameResult(player, "push"));
+                results.add(new GameResult(player, GameResultType.PUSH));
             } else {
-                results.add(new GameResult(player, "win"));
+                results.add(new GameResult(player, GameResultType.WIN));
             }
         }
         return results;

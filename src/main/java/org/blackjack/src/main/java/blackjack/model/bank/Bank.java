@@ -6,45 +6,46 @@ import org.blackjack.src.main.java.blackjack.model.player.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Bank {
-    private final Map<Player, BankAccount> accounts;
+    private final Map<BankAccount, Integer> accounts; // Изменено на хранение BankAccount напрямую
 
     public Bank() {
         this.accounts = new HashMap<>();
     }
 
-    // Регистрируем игрока в банке с начальным балансом
-    public void registerPlayer(Player player, int initialBalance) {
-        accounts.put(player, new BankAccount(initialBalance));
+    // Теперь метод принимает объект BankAccount напрямую
+    public void registerAccount(BankAccount account) {
+        accounts.put(account, account.getBalance());
     }
 
-    // Обработка ставки игрока
-    public boolean placeBet(Player player, int betAmount) {
-        BankAccount account = accounts.get(player);
-        if (account != null && account.withdraw(betAmount)) {
-            // Ставка успешно снята с баланса игрока
+    // Обработка ставки с учетом BankAccount
+    public boolean placeBet(BankAccount account, int betAmount) {
+        if (accounts.containsKey(account) && account.withdraw(betAmount)) {
+            // Ставка успешно снята с баланса
             return true;
         }
         // Недостаточно средств для ставки
         return false;
     }
 
-    // Выплата выигрыша игроку
-    public void payoutWin(Player player, int winAmount) {
-        BankAccount account = accounts.get(player);
-        if (account != null) {
+    // Выплата выигрыша с учетом BankAccount
+    public void payoutWin(BankAccount account, int winAmount) {
+        if (accounts.containsKey(account)) {
             account.deposit(winAmount);
         }
     }
 
-    // Возврат ставки игроку в случае ничьи
-    public void refundBet(Player player, int betAmount) {
-        payoutWin(player, betAmount); // Просто возвращаем ставку, как выигрыш
+    // Возврат ставки в случае ничьи
+    public void refundBet(BankAccount account, int betAmount) {
+        payoutWin(account, betAmount); // Просто возвращаем ставку, как выигрыш
     }
 
-    // Получение баланса игрока
-    public int getBalance(Player player) {
-        BankAccount account = accounts.get(player);
+    // Получение баланса с учетом BankAccount
+    public int getBalance(BankAccount account) {
         return account != null ? account.getBalance() : 0;
     }
 }
+

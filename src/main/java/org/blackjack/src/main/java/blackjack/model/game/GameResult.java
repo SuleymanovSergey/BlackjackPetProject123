@@ -4,9 +4,9 @@ import org.blackjack.src.main.java.blackjack.model.player.Player;
 
 public class GameResult {
     private Player player;
-    private String result; // "win", "lose", "push"
+    private GameResultType result; // Используем перечисление вместо строки
 
-    public GameResult(Player player, String result) {
+    public GameResult(Player player, GameResultType result) {
         this.player = player;
         this.result = result;
     }
@@ -15,7 +15,8 @@ public class GameResult {
         return player;
     }
 
-    public String getResult() {
+    public GameResultType getResult() {
         return result;
     }
 }
+

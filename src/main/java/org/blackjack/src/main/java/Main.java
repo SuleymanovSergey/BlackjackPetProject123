@@ -1,6 +1,7 @@
 package org.blackjack.src.main.java;
 
 import org.blackjack.src.main.java.blackjack.controller.BlackjackCasino;
+import org.blackjack.src.main.java.blackjack.model.bank.Bank;
 import org.blackjack.src.main.java.blackjack.model.game.BlackJackGame;
 import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
@@ -18,7 +19,8 @@ public class Main {
 
 
         Dealer dealer = new Dealer(deck, perfectShuffle);
-        BlackjackCasino casino = new BlackjackCasino(dealer);
+        Bank bank = new Bank();
+        BlackjackCasino casino = new BlackjackCasino(bank,dealer);
         BlackJackPlayer player = new BlackJackPlayer(1000);
 
 
