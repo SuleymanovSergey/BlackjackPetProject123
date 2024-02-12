@@ -26,18 +26,16 @@ public class BlackjackCasino {
 
     public void registerPlayer(BlackJackPlayer player, int initialBalance) {
         BankAccount account = new BankAccount(initialBalance);
-        BlackJackPlayer BlackJackplayer = null;
-        BlackJackplayer.setAccount(account); // Устанавливаем связанный банковский счёт для игрока
+        player.setAccount(account); // Устанавливаем связанный банковский счёт для игрока
         bank.registerAccount(account); // Регистрируем счёт в банке
     }
 
-    public void startGame(List<Player> players) {
+    public void startGame(List<BlackJackPlayer> players) {
         BlackJackGame game = new BlackJackGame(dealer);
         players.forEach(player -> {
             game.addPlayer(player);
             // Используем BankAccount игрока для ставки
-            BlackJackPlayer BlackJackplayer = null;
-            bank.placeBet(BlackJackplayer.getAccount(), 10); // Пример ставки
+            bank.placeBet(player.getAccount(), 10); // Пример ставки
         });
         game.startNewGame();
         resolveBets(game);
@@ -51,8 +49,7 @@ public class BlackjackCasino {
             switch (result.getResult()) {
                 case WIN:
                     // Используем BankAccount игрока для выплаты выигрыша
-                    BlackJackPlayer BlackJackplayer = null;
-                    bank.payoutWin(BlackJackplayer.getAccount(), 20); // Пример выигрыша
+                    bank.payoutWin(player.getAccount(), 20); // Пример выигрыша
                     break;
                 case LOSE:
                     // Ставка уже учтена
@@ -61,8 +58,12 @@ public class BlackjackCasino {
                     // Используем BankAccount игрока для возврата ставки
                     //bank.refundBet(BlackJackplayer.getAccount(), 10);
                     break;
+
+                default:
+                    break;
             }
         }
     }
 }
+
 

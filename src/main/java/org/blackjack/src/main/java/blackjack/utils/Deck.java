@@ -26,20 +26,20 @@ public class Deck {
         }
     }
 
-
     public List<Card> getCards() {
         return cards;
-    }
-
-    public Card dealCard() {
-        if (!cards.isEmpty()) {
-            return cards.remove(0);
-        } else {
-            throw new IllegalStateException("No more cards in the deck");
-        }
     }
 
     public int size() {
         return cards.size();
     }
+
+    public Card remove(int i) {
+        return cards.remove(0);
+    }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
 }
+

@@ -3,6 +3,7 @@ package org.blackjack.src.main.java.blackjack.model.game;
 
 
 import org.blackjack.src.main.java.blackjack.model.card.CardBlackjackValue;
+import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
 import org.blackjack.src.main.java.blackjack.model.player.Player;
 import org.blackjack.src.main.java.blackjack.utils.Deck;
@@ -11,57 +12,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlackJackGame {
-    private Deck deck;
     private Dealer dealer;
-    private List<Player> players;
+    private List<BlackJackPlayer> players;
+    private boolean isGameOver = false;
 
     public BlackJackGame(Dealer dealer) {
         this.dealer = dealer;
-        this.deck = dealer.getDeck();
         this.players = new ArrayList<>();
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(BlackJackPlayer player) {
         players.add(player);
     }
 
 
     public void startNewGame() {
-        if (dealer == null) {
-            System.out.println("Dealer is null");
-        }
-        deck = dealer.getDeck();
         dealer.resetHand();
 
         // Раздаем карты
         for (Player player : players) {
             player.resetHand();
-            player.addCard(deck.dealCard());
-            player.addCard(deck.dealCard());
+            player.addCard(dealer.dealCard());
+            player.addCard(dealer.dealCard());
         }
 
-        dealer.addCard(deck.dealCard());
+        dealer.addCard(dealer.dealCard());
 
         // Процесс игры
-        for (Player player : players) {
-            while (player.shouldHit()) {
-                player.addCard(deck.dealCard());
+        while (!isGameOver) {
+            if (dealer.getDeckSize() == 0) {
+                isGameOver = true;
             }
-        }
 
-        // Ход дилера
-        while (dealer.shouldHit()) {
-            dealer.addCard(deck.dealCard());
+            if (CardBlackjackValue.getHandValue(dealer.getHand()) >= 17) {
+                isGameOver = true;
+            }
+
+            for (Player player : players) {
+                if (CardBlackjackValue.getHandValue(player.getHand()) >= 21) {
+                    isGameOver = true;
+                }
+            }
+
+            for (Player player : players) {
+                if (player.shouldHit()) {
+                    System.out.println("Игрок решает взять карту.");
+                    player.addCard(dealer.dealCard());
+                }
+            }
+
+            // Ход дилера
+            if (dealer.shouldHit()) {
+                System.out.println("Дилер решает взять карту.");
+                dealer.addCard(dealer.dealCard());
+            }
         }
     }
 
     // Возвращает список результатов игры
     public List<GameResult> getResults() {
         List<GameResult> results = new ArrayList<>();
-        // Предполагаем, что у класса Dealer тоже есть доступ к hand через getHand() или подобный метод
+
         CardBlackjackValue CardBlackjackValue = new CardBlackjackValue();
         int dealerScore = CardBlackjackValue.getHandValue(dealer.getHand());
-        for (Player player : players) {
+
+        for (BlackJackPlayer player : players) {
             int playerScore = CardBlackjackValue.getHandValue(player.getHand());
             if (playerScore > 21 || (dealerScore <= 21 && dealerScore > playerScore)) {
                 results.add(new GameResult(player, GameResultType.LOSE));
@@ -74,3 +89,4 @@ public class BlackJackGame {
         return results;
     }
 }
+

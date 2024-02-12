@@ -21,7 +21,7 @@ public class Main {
         Dealer dealer = new Dealer(deck, perfectShuffle);
         Bank bank = new Bank();
         BlackjackCasino casino = new BlackjackCasino(bank,dealer);
-        BlackJackPlayer player = new BlackJackPlayer(1000);
+        BlackJackPlayer player = new BlackJackPlayer();
 
 
         casino.registerPlayer(player, 1000);
@@ -32,25 +32,10 @@ public class Main {
         BlackJackGame game = new BlackJackGame(dealer);
         game.addPlayer(player);
 
-
-
         game.startNewGame();
 
 
-        while (player.shouldHit()) {
-            System.out.println("Игрок решает взять карту.");
-            dealer.dealCardToPlayer(player);
-        }
-
-
-        while (dealer.shouldHit()) {
-            System.out.println("Дилер берет карту для себя.");
-            dealer.addCard(deck.dealCard());
-        }
-
-
         casino.startGame(List.of(player));
-
 
         System.out.println("Игра окончена.");
         System.out.println("Баланс игрока: " + player.getBalance());

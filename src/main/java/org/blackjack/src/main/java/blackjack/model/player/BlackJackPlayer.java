@@ -2,6 +2,7 @@ package org.blackjack.src.main.java.blackjack.model.player;
 
 import lombok.EqualsAndHashCode;
 import org.blackjack.src.main.java.blackjack.model.bank.BankAccount;
+import org.blackjack.src.main.java.blackjack.model.card.CardBlackjackValue;
 
 @EqualsAndHashCode(callSuper=false)
 public class BlackJackPlayer extends Player {
@@ -18,9 +19,9 @@ public class BlackJackPlayer extends Player {
         this.account = account;
     }
 
-    public BlackJackPlayer(int initialBalance) {
-        this.balance = initialBalance;
-    }
+//    public BlackJackPlayer(int initialBalance) {
+//        this.balance = initialBalance;
+//    }
 
     public boolean placeBet(int amount) {
         if (amount > balance) {
@@ -37,8 +38,7 @@ public class BlackJackPlayer extends Player {
     }
 
     private int getHandValue() {
-       int value=0;
-       return value;
+        return CardBlackjackValue.getHandValue(this.getHand());
     }
 
     public void win() {

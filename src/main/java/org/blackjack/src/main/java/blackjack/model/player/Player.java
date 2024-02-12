@@ -24,6 +24,7 @@ public abstract class Player {
 
     public abstract boolean shouldHit();
 
+    public List<Card> getHand() {return hand;}
     public void resetHand() {
         hand.clear();
     }

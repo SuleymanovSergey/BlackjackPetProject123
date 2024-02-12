@@ -14,9 +14,9 @@ public class CardBlackjackValue {
             case EIGHT  -> 8;
             case NINE   -> 9;
             case TEN,
-                 JACK,
-                 QUEEN,
-                 KING   -> 10;
+                    JACK,
+                    QUEEN,
+                    KING   -> 10;
             case ACE    -> 11;
             default -> throw new IllegalArgumentException("Unknown rank: " + rank);
         };
