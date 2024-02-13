@@ -1,22 +1,24 @@
 package org.blackjack.src.main.java.blackjack.model.game;
 
+import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Player;
 
 public class GameResult {
-    private Player player;
-    private GameResultType result; // Используем перечисление вместо строки
+    private BlackJackPlayer player; // Изменено с Player на BlackJackPlayer
+    private GameResultType result;
 
-    public GameResult(Player player, GameResultType result) {
+    public GameResult(BlackJackPlayer player, GameResultType result) {
         this.player = player;
         this.result = result;
     }
 
-    public Player getPlayer() {
-        return player;
+    public BlackJackPlayer getPlayer() {
+        return this.player;
     }
 
     public GameResultType getResult() {
         return result;
     }
 }
+
 

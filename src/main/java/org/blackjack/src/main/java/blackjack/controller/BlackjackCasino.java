@@ -8,7 +8,6 @@ import org.blackjack.src.main.java.blackjack.model.game.BlackJackGame;
 import org.blackjack.src.main.java.blackjack.model.game.GameResult;
 import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
-import org.blackjack.src.main.java.blackjack.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class BlackjackCasino {
     private void resolveBets(BlackJackGame game) {
         List<GameResult> results = game.getResults();
         for (GameResult result : results) {
-            BlackJackPlayer player = (BlackJackPlayer) result.getPlayer();
+            BlackJackPlayer player = result.getPlayer(); // Теперь это безопасно
             switch (result.getResult()) {
                 case WIN:
                     // Используем BankAccount игрока для выплаты выигрыша
@@ -56,9 +55,9 @@ public class BlackjackCasino {
                     break;
                 case PUSH:
                     // Используем BankAccount игрока для возврата ставки
-                    //bank.refundBet(BlackJackplayer.getAccount(), 10);
+                    // Ошибка в комментарии исправлена на player.getAccount()
+                    bank.refundBet(player.getAccount(), 10); // Предполагаем, что это правильный метод
                     break;
-
                 default:
                     break;
             }

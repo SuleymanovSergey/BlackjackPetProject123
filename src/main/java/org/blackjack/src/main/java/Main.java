@@ -27,7 +27,7 @@ public class Main {
         casino.registerPlayer(player, 1000);
 
 
-        System.out.println("Начало новой игры в блэкджек.");
+        System.out.println("Start of a new game.");
         dealer.shuffleDeck();
         BlackJackGame game = new BlackJackGame(dealer);
         game.addPlayer(player);
@@ -37,7 +37,7 @@ public class Main {
 
         casino.startGame(List.of(player));
 
-        System.out.println("Игра окончена.");
-        System.out.println("Баланс игрока: " + player.getBalance());
+        System.out.println("Game is over.");
+        System.out.println("Player balance: " + player.getBalance());
     }
 }

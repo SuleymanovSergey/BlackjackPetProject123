@@ -47,7 +47,7 @@ public class Dealer extends Player {
 
     public Card dealCard() {
         if (!deck.isEmpty()) {
-            return deck.remove(0);
+            return deck.remove();
         } else {
             throw new IllegalStateException("No more cards in the deck");
         }

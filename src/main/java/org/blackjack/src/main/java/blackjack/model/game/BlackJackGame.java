@@ -2,6 +2,7 @@ package org.blackjack.src.main.java.blackjack.model.game;
 
 
 
+import org.blackjack.src.main.java.blackjack.model.card.Card;
 import org.blackjack.src.main.java.blackjack.model.card.CardBlackjackValue;
 import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
@@ -27,6 +28,7 @@ public class BlackJackGame {
 
 
     public void startNewGame() {
+
         dealer.resetHand();
 
         // Раздаем карты
@@ -56,15 +58,20 @@ public class BlackJackGame {
 
             for (Player player : players) {
                 if (player.shouldHit()) {
-                    System.out.println("Игрок решает взять карту.");
-                    player.addCard(dealer.dealCard());
+                    System.out.println("Player wants to hit.");
+                    Card newCard = dealer.dealCard(); // Взять карту у дилера
+                    player.addCard(newCard); // Добавить карту в руку игрока
+                    System.out.println("Players card is: " + newCard.toString()); // Вывести информацию о карте
                 }
             }
 
+
             // Ход дилера
             if (dealer.shouldHit()) {
-                System.out.println("Дилер решает взять карту.");
-                dealer.addCard(dealer.dealCard());
+                System.out.println("Dealer wants to hit.");
+                Card newCard = dealer.dealCard(); // Взять карту
+                dealer.addCard(newCard); // Добавить карту к дилеру
+                System.out.println("Dealers card is: " + newCard); // Вывести информацию о карте
             }
         }
     }

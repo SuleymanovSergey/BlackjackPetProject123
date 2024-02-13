@@ -19,10 +19,6 @@ public class BlackJackPlayer extends Player {
         this.account = account;
     }
 
-//    public BlackJackPlayer(int initialBalance) {
-//        this.balance = initialBalance;
-//    }
-
     public boolean placeBet(int amount) {
         if (amount > balance) {
             return false; // Недостаточно средств для ставки
