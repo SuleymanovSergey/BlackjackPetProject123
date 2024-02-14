@@ -26,15 +26,11 @@ public class Dealer extends Player {
 
     @Override
     public boolean shouldHit() {
-        return getHandValue() < 17;
+        return (getHandValue() < 17);
     }
 
     private int getHandValue() {
         return CardBlackjackValue.getHandValue(this.getHand());
-    }
-
-    public void dealCardToPlayer(Player player) {
-        player.addCard(dealCard());
     }
 
     public int getDeckSize() {

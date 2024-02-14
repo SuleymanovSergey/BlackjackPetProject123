@@ -18,11 +18,12 @@ public class Bank {
     // Обработка ставки с учетом BankAccount
     public boolean placeBet(BankAccount account, int betAmount) {
         if (accounts.containsKey(account) && account.withdraw(betAmount)) {
-            // Ставка успешно снята с баланса
-            return true;
+            account.withdraw(betAmount);
+            System.out.println("Your bet is accepted");
+            return false;
         }
-        // Недостаточно средств для ставки
-        return false;
+        System.out.println("Your bet isn't accepted");
+        return true;
     }
 
     // Выплата выигрыша с учетом BankAccount

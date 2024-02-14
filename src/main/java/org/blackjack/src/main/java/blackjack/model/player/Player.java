@@ -20,6 +20,7 @@ public abstract class Player {
 
     public void addCard(Card card) {
         hand.add(card);
+        System.out.println("Card is: " + card.toString()); // Вывести информацию о карте
     }
 
     public abstract boolean shouldHit();

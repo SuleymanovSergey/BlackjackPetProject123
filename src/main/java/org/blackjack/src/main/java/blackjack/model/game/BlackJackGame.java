@@ -34,10 +34,13 @@ public class BlackJackGame {
         // Раздаем карты
         for (Player player : players) {
             player.resetHand();
+            System.out.println("Player gets hand.");
             player.addCard(dealer.dealCard());
             player.addCard(dealer.dealCard());
         }
 
+        System.out.println("Dealer gets hand.");
+        dealer.addCard(dealer.dealCard());
         dealer.addCard(dealer.dealCard());
 
         // Процесс игры
@@ -46,7 +49,7 @@ public class BlackJackGame {
                 isGameOver = true;
             }
 
-            if (CardBlackjackValue.getHandValue(dealer.getHand()) >= 17) {
+            if (CardBlackjackValue.getHandValue(dealer.getHand()) >= 21) {
                 isGameOver = true;
             }
 
@@ -61,17 +64,14 @@ public class BlackJackGame {
                     System.out.println("Player wants to hit.");
                     Card newCard = dealer.dealCard(); // Взять карту у дилера
                     player.addCard(newCard); // Добавить карту в руку игрока
-                    System.out.println("Players card is: " + newCard.toString()); // Вывести информацию о карте
                 }
             }
-
 
             // Ход дилера
             if (dealer.shouldHit()) {
                 System.out.println("Dealer wants to hit.");
                 Card newCard = dealer.dealCard(); // Взять карту
                 dealer.addCard(newCard); // Добавить карту к дилеру
-                System.out.println("Dealers card is: " + newCard); // Вывести информацию о карте
             }
         }
     }

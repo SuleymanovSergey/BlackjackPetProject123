@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import org.blackjack.src.main.java.blackjack.model.bank.BankAccount;
 import org.blackjack.src.main.java.blackjack.model.card.CardBlackjackValue;
 
+import java.util.Scanner;
+
 @EqualsAndHashCode(callSuper=false)
 public class BlackJackPlayer extends Player {
     private int balance;
@@ -30,26 +32,26 @@ public class BlackJackPlayer extends Player {
 
     @Override
     public boolean shouldHit() {
-        return getHandValue() < 21;
+        Scanner scanner = new Scanner(System.in);
+        String answer;
+        while (true) {
+            System.out.println("Do you want to hit? Type 'yes' to hit, type 'no' to stop");
+            answer = scanner.next();
+            if (answer.equalsIgnoreCase("yes")) {
+                return true;
+            } else if (answer.equalsIgnoreCase("no")) {
+                return false;
+            } else {
+                System.out.println("Invalid input. Please type 'yes' or 'no'.");
+            }
+        }
     }
+
 
     private int getHandValue() {
         return CardBlackjackValue.getHandValue(this.getHand());
     }
 
-    public void win() {
-        balance += currentBet * 2; // Выигрыш удваивает ставку
-        currentBet = 0;
-    }
-
-    public void lose() {
-        currentBet = 0; // Ставка сгорает
-    }
-
-    public void push() {
-        balance += currentBet; // Возврат ставки
-        currentBet = 0;
-    }
 
     public int getBalance() {
         return balance;

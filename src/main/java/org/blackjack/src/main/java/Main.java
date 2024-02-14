@@ -13,31 +13,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
+        Bank bank = new Bank();
         Deck deck = new Deck();
         ShuffleAlgorithm perfectShuffle = new PerfectShuffle();
-
-
-        Dealer dealer = new Dealer(deck, perfectShuffle);
-        Bank bank = new Bank();
-        BlackjackCasino casino = new BlackjackCasino(bank,dealer);
+        Dealer dealer = new Dealer(deck, perfectShuffle); // Создание дилера
+        BlackjackCasino casino = new BlackjackCasino(bank, dealer); // Передача дилера в конструктор
         BlackJackPlayer player = new BlackJackPlayer();
-
-
-        casino.registerPlayer(player, 1000);
-
-
-        System.out.println("Start of a new game.");
-        dealer.shuffleDeck();
-        BlackJackGame game = new BlackJackGame(dealer);
-        game.addPlayer(player);
-
-        game.startNewGame();
-
-
-        casino.startGame(List.of(player));
-
-        System.out.println("Game is over.");
-        System.out.println("Player balance: " + player.getBalance());
-    }
+        casino.runGame(player, 50); // Запуск игры с одним игроком и начальным балансом 0
+            }
 }
+
