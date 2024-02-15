@@ -1,7 +1,6 @@
 package org.blackjack.src.main.java.blackjack.model.game;
 
 import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
-import org.blackjack.src.main.java.blackjack.model.player.Player;
 
 public class GameResult {
     private BlackJackPlayer player; // Изменено с Player на BlackJackPlayer

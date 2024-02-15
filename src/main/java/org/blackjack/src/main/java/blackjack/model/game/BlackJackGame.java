@@ -1,13 +1,11 @@
 package org.blackjack.src.main.java.blackjack.model.game;
 
-
-
 import org.blackjack.src.main.java.blackjack.model.card.Card;
 import org.blackjack.src.main.java.blackjack.model.card.CardBlackjackValue;
 import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
 import org.blackjack.src.main.java.blackjack.model.player.Player;
-import org.blackjack.src.main.java.blackjack.utils.Deck;
+
 
 import java.util.ArrayList;
 import java.util.List;

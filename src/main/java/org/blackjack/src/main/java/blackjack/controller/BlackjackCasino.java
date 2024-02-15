@@ -1,31 +1,18 @@
 package org.blackjack.src.main.java.blackjack.controller;
 
-
-
 import org.blackjack.src.main.java.blackjack.model.bank.Bank;
 import org.blackjack.src.main.java.blackjack.model.bank.BankAccount;
 import org.blackjack.src.main.java.blackjack.model.game.BlackJackGame;
 import org.blackjack.src.main.java.blackjack.model.game.GameResult;
 import org.blackjack.src.main.java.blackjack.model.player.BlackJackPlayer;
 import org.blackjack.src.main.java.blackjack.model.player.Dealer;
-import org.blackjack.src.main.java.blackjack.model.shuffle.PerfectShuffle;
-import org.blackjack.src.main.java.blackjack.model.shuffle.ShuffleAlgorithm;
-import org.blackjack.src.main.java.blackjack.utils.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 public class BlackjackCasino {
     private Map<String, Integer> bets; // Ставки игроков, где ключ - имя игрока
