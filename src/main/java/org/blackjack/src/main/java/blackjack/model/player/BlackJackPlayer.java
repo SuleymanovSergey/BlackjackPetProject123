@@ -8,9 +8,12 @@ import java.util.Scanner;
 
 @EqualsAndHashCode(callSuper=false)
 public class BlackJackPlayer extends Player {
-    private int balance;
-    private int currentBet;
     private BankAccount account;
+    private String name;
+
+    public BlackJackPlayer(String name) {
+        this.name = name;
+    }
 
     public BankAccount getAccount() {
         return account;
@@ -19,15 +22,6 @@ public class BlackJackPlayer extends Player {
     // Метод для инициализации BankAccount
     public void setAccount(BankAccount account) {
         this.account = account;
-    }
-
-    public boolean placeBet(int amount) {
-        if (amount > balance) {
-            return false; // Недостаточно средств для ставки
-        }
-        currentBet = amount;
-        balance -= amount;
-        return true;
     }
 
     @Override
@@ -47,13 +41,11 @@ public class BlackJackPlayer extends Player {
         }
     }
 
-
     private int getHandValue() {
         return CardBlackjackValue.getHandValue(this.getHand());
     }
 
-
-    public int getBalance() {
-        return balance;
+    public String getName() {
+        return name;
     }
 }
