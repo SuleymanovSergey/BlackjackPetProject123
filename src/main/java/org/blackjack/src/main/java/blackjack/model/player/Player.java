@@ -29,5 +29,9 @@ public abstract class Player {
     public void resetHand() {
         hand.clear();
     }
+
+    public String getName() {
+        return null;
+    }
 }
 

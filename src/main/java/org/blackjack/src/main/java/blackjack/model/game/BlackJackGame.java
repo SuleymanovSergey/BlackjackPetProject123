@@ -32,7 +32,7 @@ public class BlackJackGame {
         // Раздаем карты
         for (Player player : players) {
             player.resetHand();
-            System.out.println("Player gets hand.");
+            System.out.println(player.getName() + ", gets hand.");
             player.addCard(dealer.dealCard());
             player.addCard(dealer.dealCard());
         }
@@ -59,7 +59,7 @@ public class BlackJackGame {
 
             for (Player player : players) {
                 if (player.shouldHit()) {
-                    System.out.println("Player wants to hit.");
+                    System.out.println(player.getName() + ", wants to hit.");
                     Card newCard = dealer.dealCard(); // Взять карту у дилера
                     player.addCard(newCard); // Добавить карту в руку игрока
                 }

@@ -27,15 +27,15 @@ public class BlackjackCasino {
         this.bets = new HashMap<>(); // Инициализация карты ставок
     }
 
-    public void registerPlayer(BlackJackPlayer player, int initialBalance) {
+    public void registerPlayer(BlackJackPlayer player) {
         BankAccount account = new BankAccount(0);
         player.setAccount(account); // Устанавливаем связанный банковский счёт для игрока
         bank.registerAccount(account); // Регистрируем счёт в банке
     }
 
-    public void runGame(List<BlackJackPlayer> players, int initialBalance) {
+    public void runGame(List<BlackJackPlayer> players) {
         for (BlackJackPlayer player : players) {
-            registerPlayer(player, initialBalance);
+            registerPlayer(player);
             requestDepositForPlayer(player); // Предполагается, что этот метод запрашивает депозит у игрока и вносит его на счет в банке
         }
 

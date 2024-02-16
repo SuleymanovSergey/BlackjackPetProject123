@@ -22,23 +22,22 @@ public class Main {
         BlackjackCasino casino = new BlackjackCasino(bank, dealer);
 
         System.out.println("Enter the number of players:");
-        int numberOfPlayers = scanner.nextInt();
+        int numberOfPlayers = Integer.parseInt(scanner.nextLine());
 
         List<BlackJackPlayer> players = new ArrayList<>();
         for (int i = 1; i <= numberOfPlayers; i++) {
-            scanner.nextLine();
             System.out.println("Enter name for Player " + i + ":");
             String playerName = scanner.nextLine();
             BlackJackPlayer player = new BlackJackPlayer(playerName);
             players.add(player);
         }
 
-        int initialBalance = 0; // Эта переменная не используется. Баланс устанавливается через депозит
-        casino.runGame(players, initialBalance);
+        casino.runGame(players);
 
         scanner.close();
     }
 }
+
 
 
 
